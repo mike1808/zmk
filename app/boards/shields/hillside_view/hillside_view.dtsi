@@ -67,7 +67,14 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)                                       RC
   sensors {
     compatible = "zmk,keymap-sensors";
     sensors = <&left_encoder &right_encoder>;
-    triggers-per-rotation = <20>;
+    left {
+      // EVQWK
+      triggers-per-rotation = <15>;
+    };
+    right {
+      // EC11
+      triggers-per-rotation = <20>;
+    };
   };
 
   left_encoder: encoder_left {
@@ -76,7 +83,7 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)                                       RC
     label = "LEFT_ENCODER";
     a-gpios = <&pro_micro 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
     b-gpios = <&pro_micro 21 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
-    steps = <80>;
+    steps = <30>;
   };
 
   right_encoder: encoder_right {
