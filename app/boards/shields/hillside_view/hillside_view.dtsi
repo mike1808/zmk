@@ -52,7 +52,6 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)                                       RC
 
   kscan0: kscan {
     compatible = "zmk,kscan-gpio-matrix";
-    label = "KSCAN";
 
     diode-direction = "col2row";
     row-gpios
@@ -77,21 +76,27 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)                                       RC
     };
   };
 
-  left_encoder: encoder_left {
+  left_encoder: left_encoder {
     status = "disabled";
     compatible = "alps,ec11";
+
     label = "LEFT_ENCODER";
+
     a-gpios = <&pro_micro 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
     b-gpios = <&pro_micro 21 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+
     steps = <30>;
   };
 
-  right_encoder: encoder_right {
+  right_encoder: right_encoder {
     status = "disabled";
     compatible = "alps,ec11";
+
     label = "RIGHT_ENCODER";
+
     a-gpios = <&pro_micro 20 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
     b-gpios = <&pro_micro 21 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
+
     steps = <80>;
   };
 };
@@ -124,7 +129,16 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)                                       RC
       low-power-enable;
     };
   };
+
+  qdec_default: qdec_default {
+    group1 {
+      psels = <NRF_PSEL(QDEC_A, 0, 29)>,
+              <NRF_PSEL(QDEC_B, 0, 31)>;
+      bias-pull-up;
+    };
+  };
 };
+
 
 &spi3 {
   compatible = "nordic,nrf-spim";
@@ -136,7 +150,6 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)                                       RC
 
   led_strip: ws2812@0 {
     compatible = "worldsemi,ws2812-spi";
-    label = "WS2812";
 
     /* SPI */
     reg = <0>; /* ignored, but necessary for SPI bindings */
@@ -160,7 +173,6 @@ nice_view_spi: &spi0 {
 
   nice_view: ls0xx@0 {
     compatible = "sharp,ls0xx";
-    label = "DISPLAY";
     spi-max-frequency = <1000000>;
     reg = <0>;
     width = <160>;
